@@ -216,17 +216,17 @@ async function downloadFile(key) {
 function requestDelete(key) {
   pendingDeleteKey = key;
   confirmModalText.textContent = `"${displayName(key)}" will be permanently deleted.`;
-  confirmModal.hidden = false;
+  confirmModal.classList.add('is-open');
 }
 
 confirmCancel.addEventListener('click', () => {
-  confirmModal.hidden = true;
+  confirmModal.classList.remove('is-open');
   pendingDeleteKey = null;
 });
 
 confirmModal.addEventListener('click', (e) => {
   if (e.target === confirmModal) {
-    confirmModal.hidden = true;
+    confirmModal.classList.remove('is-open');
     pendingDeleteKey = null;
   }
 });
@@ -234,7 +234,7 @@ confirmModal.addEventListener('click', (e) => {
 confirmOk.addEventListener('click', async () => {
   if (!pendingDeleteKey) return;
   const key = pendingDeleteKey;
-  confirmModal.hidden = true;
+  confirmModal.classList.remove('is-open');
   pendingDeleteKey = null;
 
   try {
